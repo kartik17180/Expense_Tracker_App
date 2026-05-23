@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { connectDB } from "./DB/Database.js";
+import connectDB from "./DB/Database.js";   // make sure Database.js exports default
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import helmet from "helmet";
@@ -9,13 +9,18 @@ import transactionRoutes from "./Routers/Transactions.js";
 import userRoutes from "./Routers/userRouter.js";
 import path from "path";
 
+// Load environment variables from .env file
 dotenv.config({ path: "./config/config.env" });
+
 const app = express();
 
-const port = process.env.PORT;
+// Use PORT from env or fallback to 5000
+const PORT = process.env.PORT || 5000;
 
+// Connect to MongoDB
 connectDB();
 
+// Allowed origins for CORS
 const allowedOrigins = [
   "https://main.d1sj7cd70hlter.amplifyapp.com",
   "https://expense-tracker-app-three-beryl.vercel.app",
@@ -37,14 +42,16 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Router
+// Routers
 app.use("/api/v1", transactionRoutes);
 app.use("/api/auth", userRoutes);
 
+// Test route
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on http://localhost:${port}`);
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is listening on http://localhost:${PORT}`);
 });
