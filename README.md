@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Expense Management System using MERN Stack
 
@@ -177,3 +178,6 @@ Insert gif or link to demo
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+=======
+"# Expense_Tracker_App" 
+>>>>>>> 99146a40b24e1521b394a5a464767ec462fb0346
